@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:oxyboots/app.dart';
-import 'config/styles.dart';
 
 void main() {
   runApp(const MyApp());

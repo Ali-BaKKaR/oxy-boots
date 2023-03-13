@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:oxyboots/screens/login_options/login_options.dart';
 
-import '../../component/ob_ImageButton.dart';
+import '../../component/ob_image_button.dart';
 import '../../component/ob_button.dart';
 import '../../component/ob_flat_button.dart';
-import '../../component/ob_inputText.dart';
+import '../../component/ob_input_text.dart';
 import '../../config/size_config.dart';
 import '../../config/styles.dart';
 
@@ -19,7 +18,7 @@ class Signup extends StatefulWidget {
 class _SignupState extends State<Signup> {
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
 
     return Scaffold(
         backgroundColor: Styles.FrameColor,
@@ -56,7 +55,7 @@ class _SignupState extends State<Signup> {
                   vertical: SizeConfig.blockSizeVertical! * 4,
                   horizontal: SizeConfig.blockSizeHorizontal! * 4),
               child: Form(
-                  key: _formKey,
+                  key: formKey,
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: SizeConfig.blockSizeHorizontal! * 4),
@@ -120,10 +119,10 @@ class _SignupState extends State<Signup> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Don’t have an account?'),
+                  const Text('Don’t have an account?'),
                   TextButton(
                       onPressed: _signinTapped,
-                      child: Text(
+                      child: const Text(
                         'Sign Up for free',
                       ))
                 ],

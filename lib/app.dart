@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:oxyboots/screens/login_options/Signup.dart';
+import 'package:oxyboots/screens/login_options/signup.dart';
 import 'package:oxyboots/screens/login_options/login_options.dart';
 
 import 'screens/Intro/intro.dart';
@@ -13,9 +13,9 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: LoginOptions.routeName,
       routes: {
-        Intro.routeName: (context) => Intro(),
-        LoginOptions.routeName: (context) => LoginOptions(),
-        Signup.routeName: (context) => Signup()
+        Intro.routeName: (context) => const Intro(),
+        LoginOptions.routeName: (context) => const LoginOptions(),
+        Signup.routeName: (context) => const Signup()
       },
     );
   }

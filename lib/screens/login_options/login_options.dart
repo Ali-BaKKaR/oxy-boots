@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:oxyboots/component/ob_ImageButton.dart';
+import 'package:oxyboots/component/ob_image_button.dart';
 import 'package:oxyboots/component/ob_button.dart';
 import 'package:oxyboots/component/ob_flat_button.dart';
-import 'package:oxyboots/component/ob_inputText.dart';
+import 'package:oxyboots/component/ob_input_text.dart';
 import 'package:oxyboots/config/styles.dart';
-import 'package:oxyboots/screens/login_options/Signup.dart';
+import 'package:oxyboots/screens/login_options/signup.dart';
 
 import '../../config/size_config.dart';
 import '../Intro/intro.dart';
@@ -115,10 +114,10 @@ class _LoginOptionsState extends State<LoginOptions> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Don’t have an account?'),
+                  const Text('Don’t have an account?'),
                   TextButton(
                       onPressed: _signinTapped,
-                      child: Text(
+                      child: const Text(
                         'Sign Up for free',
                       ))
                 ],
