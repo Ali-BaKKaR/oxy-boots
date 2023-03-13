@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:oxyboots/app.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  await dotenv.load(fileName: '.env');
+
+  await Supabase.initialize(
+      url: 'https://${dotenv.env['SUPABASE_PROJECT_ID']!}.supabase.co',
+      anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
+      debug: false);
+
+  runApp(const App());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return const App();
-  }
-}
+final supabase = Supabase.instance.client;
+final Session? session = supabase.auth.currentSession;

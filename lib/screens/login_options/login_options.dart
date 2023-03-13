@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:oxyboots/component/ob_image_button.dart';
 import 'package:oxyboots/component/ob_button.dart';
 import 'package:oxyboots/component/ob_flat_button.dart';
 import 'package:oxyboots/component/ob_input_text.dart';
 import 'package:oxyboots/config/styles.dart';
+import 'package:oxyboots/main.dart';
 import 'package:oxyboots/screens/login_options/signup.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../config/size_config.dart';
 import '../Intro/intro.dart';
@@ -122,14 +125,14 @@ class _LoginOptionsState extends State<LoginOptions> {
                       ))
                 ],
               ),
-            )
+            ),
           ]),
         ));
   }
 
   void _signinTapped() {
     // NOTE we're simulating login here for now
-
-    Navigator.of(context).pushNamed(Signup.routeName);
+    supabase.auth.signInWithOAuth(Provider.github,
+        redirectTo: dotenv.env['SUPABASE_AUTH_CALLBACK']);
   }
 }
