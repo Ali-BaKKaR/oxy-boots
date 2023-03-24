@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:oxyboots/main.dart';
-import 'package:oxyboots/screens/login_options/login_options.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../Home/home.dart';
 import '/screens/intro/intro.dart';
 
 class Splash extends StatefulWidget {
@@ -22,13 +21,14 @@ class SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
-    if (session != null) {
-      return LoginOptions();
-    } else if (session == null) {
-      return LoginOptions();
-    } else
-      return Scaffold(
+    if (Supabase.instance.client.auth.currentSession != null) {
+      return const Home();
+    } else if (Supabase.instance.client.auth.currentSession == null) {
+      return const Intro();
+    } else {
+      return const Scaffold(
         body: Center(child: CircularProgressIndicator()),
       );
+    }
   }
 }

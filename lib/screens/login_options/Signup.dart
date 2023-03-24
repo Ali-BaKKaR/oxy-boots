@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oxyboots/repository/oxy_repo.dart';
 
 import '../../component/ob_image_button.dart';
 import '../../component/ob_button.dart';
@@ -8,7 +9,7 @@ import '../../config/size_config.dart';
 import '../../config/styles.dart';
 
 class Signup extends StatefulWidget {
-  const Signup({super.key});
+  const Signup({Key? key}) : super(key: key);
   static const String routeName = './signup';
 
   @override
@@ -16,6 +17,8 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  OxyRepository brands = OxyRepository();
+
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
@@ -98,9 +101,10 @@ class _SignupState extends State<Signup> {
                             vertical: SizeConfig.blockSizeVertical! * 4,
                           ),
                           child: OBButton(
-                              const Text('Sgin Up'),
-                              onTap: _signinTapped,
-                              true),
+                            const Text('Sgin Up'),
+                            true,
+                            onTap: _signinTapped,
+                          ),
                         ),
                         OBFlatButton(
                             const OBImageButton(

@@ -5,15 +5,13 @@ import 'package:oxyboots/component/ob_button.dart';
 import 'package:oxyboots/component/ob_flat_button.dart';
 import 'package:oxyboots/component/ob_input_text.dart';
 import 'package:oxyboots/config/styles.dart';
-import 'package:oxyboots/main.dart';
-import 'package:oxyboots/screens/login_options/signup.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../config/size_config.dart';
 import '../Intro/intro.dart';
 
 class LoginOptions extends StatefulWidget {
-  const LoginOptions({super.key});
+  const LoginOptions({Key? key}) : super(key: key);
   static const String routeName = './loginOptions';
 
   @override
@@ -96,9 +94,10 @@ class _LoginOptionsState extends State<LoginOptions> {
                             vertical: SizeConfig.blockSizeVertical! * 4,
                           ),
                           child: OBButton(
-                              const Text('Sgin In'),
-                              onTap: _signinTapped,
-                              true),
+                            const Text('Sgin In'),
+                            true,
+                            onTap: _signinTapped,
+                          ),
                         ),
                         OBFlatButton(
                             const OBImageButton(
@@ -132,7 +131,7 @@ class _LoginOptionsState extends State<LoginOptions> {
 
   void _signinTapped() {
     // NOTE we're simulating login here for now
-    supabase.auth.signInWithOAuth(Provider.github,
+    Supabase.instance.client.auth.signInWithOAuth(Provider.github,
         redirectTo: dotenv.env['SUPABASE_AUTH_CALLBACK']);
   }
 }

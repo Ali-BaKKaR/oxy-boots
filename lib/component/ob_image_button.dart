@@ -4,7 +4,7 @@ import 'package:oxyboots/config/styles.dart';
 class OBImageButton extends StatelessWidget {
   final String imageName;
   final String text;
-  const OBImageButton(this.imageName, this.text, {super.key});
+  const OBImageButton(this.imageName, this.text, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

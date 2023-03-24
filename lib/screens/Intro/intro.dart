@@ -6,7 +6,7 @@ import 'package:oxyboots/screens/login_options/login_options.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Intro extends StatefulWidget {
-  const Intro({super.key});
+  const Intro({Key? key}) : super(key: key);
   static const String routeName = './intro';
 
   @override
@@ -30,17 +30,17 @@ class _IntroState extends State<Intro> {
 
   @override
   Widget build(BuildContext context) {
-    const List<String> _images = [
+    const List<String> images = [
       'assets/images/shoes0.png',
       'assets/images/shoes1.png',
       'assets/images/shoes2.png'
     ];
-    const List<String> _headersText = [
+    const List<String> headersText = [
       'Start Journey With Nike',
       'Follow Latest Style Shoes',
       'Summer Shoes Nike 2022'
     ];
-    const List<String> _content = [
+    const List<String> content = [
       'Smart, Gorgeous & Fashionable Collection',
       'There Are Many Beautiful And Attractive Plants To Your Room',
       'Amet Minim Lit Nodeseru Saku Nandu sit Alique Dolor'
@@ -70,7 +70,7 @@ class _IntroState extends State<Intro> {
                             height: SizeConfig.blockSizeVertical! * 30,
                           ),
                           Image.asset(
-                            _images[index],
+                            images[index],
                             fit: BoxFit.contain,
                             width: SizeConfig.blockSizeHorizontal! * 100,
                             height: SizeConfig.blockSizeVertical! * 30,
@@ -83,11 +83,11 @@ class _IntroState extends State<Intro> {
                             horizontal: SizeConfig.blockSizeHorizontal! * 5),
                         child: Column(children: [
                           Text(
-                            _headersText[index],
+                            headersText[index],
                             style: Styles.HOnBoard,
                           ),
                           Text(
-                            _content[index],
+                            content[index],
                             style: Styles.COnBoard,
                           )
                         ]),
@@ -113,11 +113,12 @@ class _IntroState extends State<Intro> {
                 ),
                 // OBButton(onTap: () => _signupTapped(context), Text('Next')),
                 OBButton(
-                    _currentPage > 1.5
-                        ? const Text('Get Started')
-                        : const Text('Next'),
-                    onTap: () => onAdd(),
-                    false),
+                  _currentPage > 1.5
+                      ? const Text('Get Started')
+                      : const Text('Next'),
+                  false,
+                  onTap: () => onAdd(),
+                ),
               ],
             ),
           )
@@ -133,9 +134,9 @@ class _IntroState extends State<Intro> {
         : Navigator.of(context).pushNamed(LoginOptions.routeName);
   }
 
-  Future _signupTapped(BuildContext context) async {
-    // NOTE we're simulating login here for now
+  // Future _signupTapped(BuildContext context) async {
+  //   // NOTE we're simulating login here for now
 
-    Navigator.of(context).pushReplacementNamed(Intro.routeName);
-  }
+  //   Navigator.of(context).pushReplacementNamed(Intro.routeName);
+  // }
 }

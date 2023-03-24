@@ -5,7 +5,7 @@ import '../config/styles.dart';
 class OBInputText extends StatelessWidget {
   final String hint;
   final Icon icon;
-  const OBInputText(this.hint, this.icon, {super.key});
+  const OBInputText(this.hint, this.icon, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

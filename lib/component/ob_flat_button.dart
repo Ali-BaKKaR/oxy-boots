@@ -7,7 +7,11 @@ class OBFlatButton extends StatelessWidget {
   final Widget child;
   final GestureTapCallback? onTap;
 
-  const OBFlatButton(this.child, this.onTap, {super.key});
+  const OBFlatButton(
+    this.child,
+    this.onTap, {
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
