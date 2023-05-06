@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:oxyboots/component/ob_input_text.dart';
 import 'package:oxyboots/providers/session_provider.dart';
+import 'package:oxyboots/screens/Home/brand_item.dart';
 import 'package:provider/provider.dart';
 
 import '../../config/size_config.dart';
@@ -15,8 +16,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int i = 0;
-  late List<bool> x;
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -63,92 +62,168 @@ class _HomeState extends State<Home> {
             return SingleChildScrollView(
               child: Padding(
                   padding: EdgeInsets.symmetric(
-                      vertical: SizeConfig.blockSizeVertical! * 3,
+                      vertical: SizeConfig.blockSizeVertical! * 1,
                       horizontal: SizeConfig.blockSizeHorizontal! * 4),
-                  child: Column(
-                    children: [
-                      const OBInputText(
-                          'Looking for shoes', Icon(Icons.search)),
-                      SizedBox(
-                          height: 110,
-                          child: FutureBuilder(
-                            future: session.brands,
-                            builder: (context, snapshot) {
-                              if (snapshot.data == null) {
-                                return const Center(
-                                  child: CircularProgressIndicator(),
-                                );
-                              }
-                              return ListView.builder(
-                                itemCount: snapshot.data!.length,
-                                physics: const BouncingScrollPhysics(),
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) {
-                                  return Container(
+                  child: Column(children: [
+                    const OBInputText('Looking for shoes', Icon(Icons.search)),
+                    FutureBuilder(
+                        future: session.brands,
+                        builder: (context, snapshot) {
+                          if (snapshot.data == null) {
+                            return const Center(
+                                child: LinearProgressIndicator());
+                          }
+                          return Column(
+                            children: [
+                              SizedBox(
+                                  height: 70,
+                                  child: ListView.builder(
+                                      itemCount: snapshot.data!.length,
+                                      physics: const BouncingScrollPhysics(),
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder: (context, index) {
+                                        return BrandItem(
+                                          brandItem: snapshot.data![index],
+                                          isSelected: true,
+                                        );
+                                      })),
+                              Container(
+                                margin: EdgeInsets.symmetric(
+                                    vertical:
+                                        SizeConfig.blockSizeVertical! * 2),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Popular Shoes',
+                                      style: Styles.Header,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () => {},
+                                      child: Text(
+                                        'See all',
+                                        style: TextStyle(
+                                            color: Styles.PrimaryColor),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              ////////////////////////////////////////////////////
+                            ],
+                          );
+                        }),
+                    FutureBuilder(
+                        future: session.shoes,
+                        builder: (context, snapshot) {
+                          if (snapshot.data == null) {
+                            return Container();
+                          }
+                          return SizedBox(
+                            height: SizeConfig.blockSizeVertical! * 26,
+                            child: ListView.builder(
+                              physics: BouncingScrollPhysics(),
+                              itemCount: 2,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Container(
                                     margin: EdgeInsets.only(
-                                      top: 10,
-                                      left: index == 0 ? 0 : 0,
-                                      right: index == 10 ? 0 : 8,
-                                    ),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                        right: SizeConfig.blockSizeHorizontal! *
+                                            5),
+                                    decoration: BoxDecoration(
+                                        color: Styles.BGColor,
+                                        borderRadius:
+                                            BorderRadius.circular(16)),
+                                    child: Stack(
                                       children: [
-                                        Container(
-                                          padding: const EdgeInsets.all(6),
-                                          decoration: BoxDecoration(
-                                              color: i % 2 == 0
-                                                  ? Styles.PrimaryColor
-                                                  : null,
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                      Radius.circular(50))),
-                                          child: Row(
-                                            children: [
-                                              CircleAvatar(
-                                                backgroundColor: Styles.BGColor,
-                                                maxRadius: 22,
-                                                foregroundImage: NetworkImage(
-                                                    snapshot.data![index].logo),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: SizeConfig
+                                                          .blockSizeVertical! *
+                                                      1),
+                                              child: Image.network(
+                                                snapshot.data![index].image,
+                                                width: SizeConfig
+                                                        .blockSizeHorizontal! *
+                                                    43,
+                                                colorBlendMode:
+                                                    BlendMode.colorBurn,
                                               ),
-                                              i % 2 == 0
-                                                  ? Container(
-                                                      padding: const EdgeInsets
-                                                              .symmetric(
-                                                          horizontal: 8),
-                                                      child: Text(
-                                                        snapshot
-                                                            .data![index].name,
-                                                        style: TextStyle(
-                                                            color:
-                                                                Styles.BGColor,
-                                                            fontWeight: Styles
-                                                                .primaryFontWeightSemiBold),
-                                                      ),
-                                                    )
-                                                  : Container()
-                                            ],
-                                          ),
+                                            ),
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                  left: SizeConfig
+                                                          .blockSizeHorizontal! *
+                                                      4),
+                                              child: Text(
+                                                snapshot.data![index].tag,
+                                                style: Styles.Tag,
+                                              ),
+                                            ),
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                  left: SizeConfig
+                                                          .blockSizeHorizontal! *
+                                                      4),
+                                              child: Text(
+                                                  snapshot.data![index].name,
+                                                  style: Styles.Header),
+                                            ),
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                  left: SizeConfig
+                                                          .blockSizeHorizontal! *
+                                                      4,
+                                                  bottom: SizeConfig
+                                                          .blockSizeHorizontal! *
+                                                      4),
+                                              child: Text(
+                                                  snapshot.data![index].price
+                                                      .toString(),
+                                                  style: Styles.Header),
+                                            ),
+                                          ],
                                         ),
+                                        Positioned(
+                                          width: 34,
+                                          height: 35,
+                                          bottom: 0,
+                                          right: 0,
+                                          child: GestureDetector(
+                                              onTap: () {
+                                                print('Add Shoees');
+                                              },
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                    color: Styles.PrimaryColor,
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    16),
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    16))),
+                                                child: Icon(
+                                                  Icons.add,
+                                                  color: Styles.BGColor,
+                                                ),
+                                              )),
+                                        )
                                       ],
-                                    ),
-                                  );
-                                },
-                              );
-                            },
-                          )),
-                      ElevatedButton(onPressed: t, child: Text(i.toString())),
-                      i % 2 == 0 ? const Text('even') : const Text('Odd')
-                    ],
-                  )),
+                                    ));
+                              },
+                            ),
+                          );
+                        })
+                  ])),
             );
           },
         ));
-  }
-
-  void t() {
-    setState(() {
-      i++;
-    });
   }
 }

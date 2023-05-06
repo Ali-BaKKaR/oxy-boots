@@ -22,7 +22,7 @@ class SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     if (Supabase.instance.client.auth.currentSession != null) {
-      return const Home();
+      return Home();
     } else if (Supabase.instance.client.auth.currentSession == null) {
       return const Intro();
     } else {

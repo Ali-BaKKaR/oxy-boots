@@ -70,4 +70,10 @@ class Styles {
     fontFamily: Styles.PrimaryFontRegular,
     fontWeight: Styles.primaryFontWeightSemiBold,
   );
+  static final TextStyle Tag = TextStyle(
+    color: Styles.PrimaryColor,
+    fontSize: SizeConfig.blockSizeHorizontal! * 3.5,
+    fontFamily: Styles.PrimaryFontRegular,
+    fontWeight: Styles.primaryFontWeightSemiBold,
+  );
 }
