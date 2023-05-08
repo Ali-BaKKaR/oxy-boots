@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:oxyboots/component/ob_bottom_navigation_bar.dart';
 import 'package:oxyboots/component/ob_input_text.dart';
 import 'package:oxyboots/providers/session_provider.dart';
 import 'package:oxyboots/screens/Home/brand_item.dart';
+import 'package:oxyboots/screens/Home/shoes_item.dart';
 import 'package:provider/provider.dart';
 
 import '../../config/size_config.dart';
@@ -10,6 +12,7 @@ import '../../config/styles.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
+  static const String routeName = './home';
 
   @override
   State<Home> createState() => _HomeState();
@@ -110,7 +113,6 @@ class _HomeState extends State<Home> {
                                   ],
                                 ),
                               ),
-                              ////////////////////////////////////////////////////
                             ],
                           );
                         }),
@@ -124,106 +126,83 @@ class _HomeState extends State<Home> {
                             height: SizeConfig.blockSizeVertical! * 26,
                             child: ListView.builder(
                               physics: BouncingScrollPhysics(),
-                              itemCount: 2,
+                              itemCount: snapshot.data!.length,
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
-                                return Container(
-                                    margin: EdgeInsets.only(
-                                        right: SizeConfig.blockSizeHorizontal! *
-                                            5),
-                                    decoration: BoxDecoration(
-                                        color: Styles.BGColor,
-                                        borderRadius:
-                                            BorderRadius.circular(16)),
-                                    child: Stack(
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: SizeConfig
-                                                          .blockSizeVertical! *
-                                                      1),
-                                              child: Image.network(
-                                                snapshot.data![index].image,
-                                                width: SizeConfig
-                                                        .blockSizeHorizontal! *
-                                                    43,
-                                                colorBlendMode:
-                                                    BlendMode.colorBurn,
-                                              ),
-                                            ),
-                                            Container(
-                                              margin: EdgeInsets.only(
-                                                  left: SizeConfig
-                                                          .blockSizeHorizontal! *
-                                                      4),
-                                              child: Text(
-                                                snapshot.data![index].tag,
-                                                style: Styles.Tag,
-                                              ),
-                                            ),
-                                            Container(
-                                              margin: EdgeInsets.only(
-                                                  left: SizeConfig
-                                                          .blockSizeHorizontal! *
-                                                      4),
-                                              child: Text(
-                                                  snapshot.data![index].name,
-                                                  style: Styles.Header),
-                                            ),
-                                            Container(
-                                              margin: EdgeInsets.only(
-                                                  left: SizeConfig
-                                                          .blockSizeHorizontal! *
-                                                      4,
-                                                  bottom: SizeConfig
-                                                          .blockSizeHorizontal! *
-                                                      4),
-                                              child: Text(
-                                                  snapshot.data![index].price
-                                                      .toString(),
-                                                  style: Styles.Header),
-                                            ),
-                                          ],
-                                        ),
-                                        Positioned(
-                                          width: 34,
-                                          height: 35,
-                                          bottom: 0,
-                                          right: 0,
-                                          child: GestureDetector(
-                                              onTap: () {
-                                                print('Add Shoees');
-                                              },
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                    color: Styles.PrimaryColor,
-                                                    borderRadius:
-                                                        const BorderRadius.only(
-                                                            bottomRight:
-                                                                Radius.circular(
-                                                                    16),
-                                                            topLeft:
-                                                                Radius.circular(
-                                                                    16))),
-                                                child: Icon(
-                                                  Icons.add,
-                                                  color: Styles.BGColor,
-                                                ),
-                                              )),
-                                        )
-                                      ],
-                                    ));
+                                return ShoesItem(
+                                    shoesItem: snapshot.data![index]);
                               },
                             ),
                           );
-                        })
+                        }),
+                    Container(
+                      margin: EdgeInsets.symmetric(
+                          vertical: SizeConfig.blockSizeVertical! * 2),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'New Arrival',
+                            style: Styles.Header,
+                          ),
+                          GestureDetector(
+                            onTap: () => {},
+                            child: Text(
+                              'See all',
+                              style: TextStyle(color: Styles.PrimaryColor),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          color: Styles.BGColor,
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal:
+                                      SizeConfig.blockSizeHorizontal! * 2),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'BEST CHOICE',
+                                    style:
+                                        Styles.Tag.copyWith(letterSpacing: 2),
+                                  ),
+                                  Text(
+                                    'Nike Air Jordan',
+                                    style: Styles.Header.copyWith(
+                                        fontSize:
+                                            SizeConfig.blockSizeHorizontal! *
+                                                5),
+                                  ),
+                                  Text(
+                                    '\$894.99',
+                                    style: Styles.Header,
+                                  )
+                                ],
+                              ),
+                            ),
+                            Image.network(
+                                width: SizeConfig.blockSizeHorizontal! * 50,
+                                'https://rnkchlevztswclogwyon.supabase.co/storage/v1/object/public/shoes/PngItem_5550642%20(2)%202.png?t=2023-05-06T10%3A35%3A34.533Z')
+                          ]),
+                    )
                   ])),
             );
           },
-        ));
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Styles.PrimaryColor,
+          onPressed: () {},
+          child: SvgPicture.asset('assets/icons/menu-white.svg'),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar: OBBottomNavigationBar());
   }
 }
