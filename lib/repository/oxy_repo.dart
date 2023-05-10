@@ -13,7 +13,7 @@ class OxyRepository implements OxyRepoInterface {
     return resp.map<Brand>((e) => Brand.fromJson(e)).toList();
   }
 
-  Future<List<Shoes>> getShoes() async {
+  Future<List<Shoes>> getShoesList() async {
     final resp = await Supabase.instance.client
         .from('shoes')
         .select('id,name,tag,price,description,brand,image');

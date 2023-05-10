@@ -117,7 +117,7 @@ class _HomeState extends State<Home> {
                           );
                         }),
                     FutureBuilder(
-                        future: session.shoes,
+                        future: session.shoesList,
                         builder: (context, snapshot) {
                           if (snapshot.data == null) {
                             return Container();
@@ -156,43 +156,57 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     Container(
-                      decoration: BoxDecoration(
-                          color: Styles.BGColor,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal:
-                                      SizeConfig.blockSizeHorizontal! * 2),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                        decoration: BoxDecoration(
+                            color: Styles.BGColor,
+                            borderRadius: BorderRadius.circular(20)),
+                        child: FutureBuilder(
+                          future: session.shoesList,
+                          builder: (context, snapshot) {
+                            final bestChoice = snapshot.data?.firstWhere(
+                                (element) => element.tag == "Best Choice");
+                            if (snapshot.data == null) {
+                              return Container();
+                            }
+                            return Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    'BEST CHOICE',
-                                    style:
-                                        Styles.Tag.copyWith(letterSpacing: 2),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal:
+                                            SizeConfig.blockSizeHorizontal! * 2,
+                                        vertical:
+                                            SizeConfig.blockSizeVertical! * 5),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          bestChoice!.tag,
+                                          style: Styles.Tag.copyWith(
+                                              letterSpacing: 2),
+                                        ),
+                                        Text(
+                                          bestChoice.name,
+                                          style: Styles.Header.copyWith(
+                                              height: 2,
+                                              fontSize: SizeConfig
+                                                      .blockSizeHorizontal! *
+                                                  5),
+                                        ),
+                                        Text(
+                                          '\$${bestChoice.price}',
+                                          style: Styles.Header,
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                  Text(
-                                    'Nike Air Jordan',
-                                    style: Styles.Header.copyWith(
-                                        fontSize:
-                                            SizeConfig.blockSizeHorizontal! *
-                                                5),
-                                  ),
-                                  Text(
-                                    '\$894.99',
-                                    style: Styles.Header,
-                                  )
-                                ],
-                              ),
-                            ),
-                            Image.network(
-                                width: SizeConfig.blockSizeHorizontal! * 50,
-                                'https://rnkchlevztswclogwyon.supabase.co/storage/v1/object/public/shoes/PngItem_5550642%20(2)%202.png?t=2023-05-06T10%3A35%3A34.533Z')
-                          ]),
-                    )
+                                  Image.network(bestChoice.image,
+                                      width:
+                                          SizeConfig.blockSizeHorizontal! * 50)
+                                ]);
+                          },
+                        ))
                   ])),
             );
           },

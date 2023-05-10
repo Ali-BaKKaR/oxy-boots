@@ -7,13 +7,13 @@ import '../models/shoes.dart';
 class SessionProvider extends ChangeNotifier {
   Future<List<Brand>> _brands;
   Future<List<Brand>> get brands => _brands;
-  Future<List<Shoes>> _shoes;
-  Future<List<Shoes>> get shoes => _shoes;
+  Future<List<Shoes>> _shoesList;
+  Future<List<Shoes>> get shoesList => _shoesList;
   OxyRepoInterface oxyRepo;
 
   SessionProvider(this.oxyRepo)
       : _brands = oxyRepo.getBrands(),
-        _shoes = oxyRepo.getShoes();
+        _shoesList = oxyRepo.getShoesList();
 
   refreshBrands() async {
     _brands = (await oxyRepo.getBrands()) as Future<List<Brand>>;

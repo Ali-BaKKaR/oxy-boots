@@ -74,6 +74,6 @@ class Styles {
     color: Styles.PrimaryColor,
     fontSize: SizeConfig.blockSizeHorizontal! * 3.5,
     fontFamily: Styles.PrimaryFontRegular,
-    fontWeight: Styles.primaryFontWeightSemiBold,
+    fontWeight: Styles.primaryFontWeightLight,
   );
 }

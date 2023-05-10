@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oxyboots/models/shoes.dart';
+import 'package:oxyboots/screens/shoes_details/shoes_details.dart';
 
 import '../../config/size_config.dart';
 import '../../config/styles.dart';
@@ -16,39 +17,49 @@ class ShoesItem extends StatelessWidget {
             color: Styles.BGColor, borderRadius: BorderRadius.circular(16)),
         child: Stack(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  margin: EdgeInsets.symmetric(
-                      vertical: SizeConfig.blockSizeVertical! * 0.5),
-                  child: Image.network(
-                    shoesItem.image,
-                    width: SizeConfig.blockSizeHorizontal! * 43,
-                    colorBlendMode: BlendMode.colorBurn,
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ShoesDetails(
+                              shoes: shoesItem,
+                            )));
+              },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                        vertical: SizeConfig.blockSizeVertical! * 0.5),
+                    child: Image.network(
+                      shoesItem.image,
+                      width: SizeConfig.blockSizeHorizontal! * 43,
+                      colorBlendMode: BlendMode.colorBurn,
+                    ),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                      left: SizeConfig.blockSizeHorizontal! * 4),
-                  child: Text(
-                    shoesItem.tag,
-                    style: Styles.Tag,
+                  Container(
+                    margin: EdgeInsets.only(
+                        left: SizeConfig.blockSizeHorizontal! * 4),
+                    child: Text(
+                      shoesItem.tag,
+                      style: Styles.Tag,
+                    ),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                      left: SizeConfig.blockSizeHorizontal! * 4),
-                  child: Text(shoesItem.name, style: Styles.Header),
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                      left: SizeConfig.blockSizeHorizontal! * 4,
-                      bottom: SizeConfig.blockSizeHorizontal! * 4),
-                  child: Text('\$' + shoesItem.price.toString(),
-                      style: Styles.Header),
-                ),
-              ],
+                  Container(
+                    margin: EdgeInsets.only(
+                        left: SizeConfig.blockSizeHorizontal! * 4),
+                    child: Text(shoesItem.name, style: Styles.Header),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                        left: SizeConfig.blockSizeHorizontal! * 4,
+                        bottom: SizeConfig.blockSizeHorizontal! * 4),
+                    child: Text('\$' + shoesItem.price.toString(),
+                        style: Styles.Header),
+                  ),
+                ],
+              ),
             ),
             Positioned(
               width: 34,
