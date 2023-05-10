@@ -69,7 +69,6 @@ class _ShoesDetailsState extends State<ShoesDetails> {
                   horizontal: SizeConfig.blockSizeHorizontal! * 6,
                   vertical: SizeConfig.blockSizeVertical! * 1),
               width: SizeConfig.blockSizeHorizontal! * 100,
-              // height: SizeConfig.blockSizeVertical! * 60,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: Styles.BGColor),

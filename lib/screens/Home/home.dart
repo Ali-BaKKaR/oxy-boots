@@ -5,10 +5,13 @@ import 'package:oxyboots/component/ob_input_text.dart';
 import 'package:oxyboots/providers/session_provider.dart';
 import 'package:oxyboots/screens/Home/brand_item.dart';
 import 'package:oxyboots/screens/Home/shoes_item.dart';
+import 'package:oxyboots/screens/cart/cart.dart';
+import 'package:oxyboots/screens/favourites/favourites.dart';
 import 'package:provider/provider.dart';
 
 import '../../config/size_config.dart';
 import '../../config/styles.dart';
+import '../shoes_details/shoes_details.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -103,7 +106,10 @@ class _HomeState extends State<Home> {
                                       style: Styles.Header,
                                     ),
                                     GestureDetector(
-                                      onTap: () => {},
+                                      onTap: () => {
+                                        Navigator.of(context)
+                                            .pushNamed(Favourites.routeName)
+                                      },
                                       child: Text(
                                         'See all',
                                         style: TextStyle(
@@ -126,11 +132,16 @@ class _HomeState extends State<Home> {
                             height: SizeConfig.blockSizeVertical! * 26,
                             child: ListView.builder(
                               physics: BouncingScrollPhysics(),
-                              itemCount: snapshot.data!.length,
+                              itemCount: 7,
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
-                                return ShoesItem(
-                                    shoesItem: snapshot.data![index]);
+                                return Container(
+                                  margin: EdgeInsets.only(
+                                      right:
+                                          SizeConfig.blockSizeHorizontal! * 5),
+                                  child: ShoesItem(
+                                      shoesItem: snapshot.data![index]),
+                                );
                               },
                             ),
                           );
@@ -146,7 +157,10 @@ class _HomeState extends State<Home> {
                             style: Styles.Header,
                           ),
                           GestureDetector(
-                            onTap: () => {},
+                            onTap: () => {
+                              Navigator.of(context)
+                                  .pushNamed(Favourites.routeName)
+                            },
                             child: Text(
                               'See all',
                               style: TextStyle(color: Styles.PrimaryColor),
@@ -167,44 +181,56 @@ class _HomeState extends State<Home> {
                             if (snapshot.data == null) {
                               return Container();
                             }
-                            return Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal:
-                                            SizeConfig.blockSizeHorizontal! * 2,
-                                        vertical:
-                                            SizeConfig.blockSizeVertical! * 5),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          bestChoice!.tag,
-                                          style: Styles.Tag.copyWith(
-                                              letterSpacing: 2),
-                                        ),
-                                        Text(
-                                          bestChoice.name,
-                                          style: Styles.Header.copyWith(
-                                              height: 2,
-                                              fontSize: SizeConfig
-                                                      .blockSizeHorizontal! *
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ShoesDetails(
+                                              shoes: bestChoice,
+                                            )));
+                              },
+                              child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal:
+                                              SizeConfig.blockSizeHorizontal! *
+                                                  2,
+                                          vertical:
+                                              SizeConfig.blockSizeVertical! *
                                                   5),
-                                        ),
-                                        Text(
-                                          '\$${bestChoice.price}',
-                                          style: Styles.Header,
-                                        )
-                                      ],
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            bestChoice!.tag,
+                                            style: Styles.Tag.copyWith(
+                                                letterSpacing: 2),
+                                          ),
+                                          Text(
+                                            bestChoice.name,
+                                            style: Styles.Header.copyWith(
+                                                height: 2,
+                                                fontSize: SizeConfig
+                                                        .blockSizeHorizontal! *
+                                                    5),
+                                          ),
+                                          Text(
+                                            '\$${bestChoice.price}',
+                                            style: Styles.Header,
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  Image.network(bestChoice.image,
-                                      width:
-                                          SizeConfig.blockSizeHorizontal! * 50)
-                                ]);
+                                    Image.network(bestChoice.image,
+                                        width: SizeConfig.blockSizeHorizontal! *
+                                            50)
+                                  ]),
+                            );
                           },
                         ))
                   ])),
@@ -213,7 +239,9 @@ class _HomeState extends State<Home> {
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Styles.PrimaryColor,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushNamed(Cart.routeName);
+          },
           child: SvgPicture.asset('assets/icons/menu-white.svg'),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

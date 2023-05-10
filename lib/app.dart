@@ -3,6 +3,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:oxyboots/providers/session_provider.dart';
 import 'package:oxyboots/repository/oxy_repo.dart';
 import 'package:oxyboots/repository/oxy_repo_interface.dart';
+import 'package:oxyboots/screens/Home/home.dart';
+import 'package:oxyboots/screens/cart/cart.dart';
+import 'package:oxyboots/screens/favourites/favourites.dart';
 import 'package:oxyboots/screens/login_options/signup.dart';
 import 'package:oxyboots/screens/login_options/login_options.dart';
 import 'package:oxyboots/screens/splash/splash.dart';
@@ -23,7 +26,10 @@ class App extends StatelessWidget {
         Splash.routeName: (context) => const Splash(),
         Intro.routeName: (context) => const Intro(),
         LoginOptions.routeName: (context) => const LoginOptions(),
-        Signup.routeName: (context) => const Signup()
+        Signup.routeName: (context) => const Signup(),
+        Favourites.routeName: (context) => const Favourites(),
+        Cart.routeName: (context) => const Cart(),
+        Home.routeName: (context) => const Home()
       },
     );
   }

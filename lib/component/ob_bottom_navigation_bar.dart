@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:oxyboots/screens/favourites/favourites.dart';
 import 'package:oxyboots/screens/login_options/login_options.dart';
 
 import '../config/styles.dart';
@@ -34,7 +35,7 @@ class OBBottomNavigationBarState extends State<OBBottomNavigationBar> {
                 },
                 icon: SvgPicture.asset(
                   'assets/icons/home.svg',
-                  width: 23,
+                  width: 30,
                   color: index == 0 ? Styles.PrimaryColor : Styles.TextColor,
                 ),
               ),
@@ -42,12 +43,12 @@ class OBBottomNavigationBarState extends State<OBBottomNavigationBar> {
                 onPressed: () => {
                   index = 1,
                   Navigator.of(context).pushNamed(
-                    LoginOptions.routeName,
+                    Favourites.routeName,
                   )
                 },
-                icon: SvgPicture.asset(
-                  'assets/icons/heart.svg',
-                  width: 23,
+                icon: Icon(
+                  Icons.favorite_border,
+                  size: 30,
                   color: index == 1 ? Styles.PrimaryColor : Styles.TextColor,
                 ),
               ),
@@ -55,12 +56,12 @@ class OBBottomNavigationBarState extends State<OBBottomNavigationBar> {
                 onPressed: () => {
                   index = 2,
                   Navigator.of(context).pushNamed(
-                    LoginOptions.routeName,
+                    Favourites.routeName,
                   )
                 },
-                icon: SvgPicture.asset(
-                  'assets/icons/notification.svg',
-                  width: 23,
+                icon: Icon(
+                  Icons.notifications_none,
+                  size: 30,
                   color: index == 2 ? Styles.PrimaryColor : Styles.TextColor,
                 ),
               ),
@@ -68,12 +69,12 @@ class OBBottomNavigationBarState extends State<OBBottomNavigationBar> {
                 onPressed: () => {
                   index = 3,
                   Navigator.of(context).pushNamed(
-                    LoginOptions.routeName,
+                    Favourites.routeName,
                   )
                 },
-                icon: SvgPicture.asset(
-                  'assets/icons/user.svg',
-                  width: 23,
+                icon: Icon(
+                  Icons.person_outline,
+                  size: 30,
                   color: index == 3 ? Styles.PrimaryColor : Styles.TextColor,
                 ),
               )
