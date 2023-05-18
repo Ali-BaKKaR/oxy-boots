@@ -140,7 +140,8 @@ class _HomeState extends State<Home> {
                                       right:
                                           SizeConfig.blockSizeHorizontal! * 5),
                                   child: ShoesItem(
-                                      shoesItem: snapshot.data![index]),
+                                      shoesItem: snapshot.data![index],
+                                      session: session),
                                 );
                               },
                             ),

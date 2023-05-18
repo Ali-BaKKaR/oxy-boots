@@ -66,7 +66,10 @@ class Favourites extends StatelessWidget {
                         ),
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {
-                          return ShoesItem(shoesItem: snapshot.data![index]);
+                          return ShoesItem(
+                            shoesItem: snapshot.data![index],
+                            session: session,
+                          );
                         },
                       ));
                 },

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:oxyboots/models/shoes.dart';
+import 'package:oxyboots/providers/session_provider.dart';
 import 'package:oxyboots/screens/shoes_details/shoes_details.dart';
 
 import '../../config/size_config.dart';
@@ -7,7 +9,9 @@ import '../../config/styles.dart';
 
 class ShoesItem extends StatelessWidget {
   final Shoes shoesItem;
-  const ShoesItem({Key? key, required this.shoesItem}) : super(key: key);
+  final SessionProvider session;
+  const ShoesItem({Key? key, required this.shoesItem, required this.session})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +72,15 @@ class ShoesItem extends StatelessWidget {
               right: 0,
               child: GestureDetector(
                   onTap: () {
-                    print('Add Shoees');
+                    session.addShoesToCart(shoesItem);
+                    Fluttertoast.showToast(
+                        msg: "You added this Shoes to your Cart",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 28.0);
                   },
                   child: Container(
                     decoration: BoxDecoration(
