@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:oxyboots/screens/favourites/favourites.dart';
-import 'package:oxyboots/screens/login_options/login_options.dart';
 
 import '../config/styles.dart';
 import '../screens/Home/home.dart';
@@ -14,25 +13,6 @@ class OBBottomNavigationBar extends StatefulWidget {
 }
 
 class OBBottomNavigationBarState extends State<OBBottomNavigationBar> {
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  static const List<Widget> screens = <Widget>[
-    Home(),
-    Favourites(),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
     String? currentRouteName = ModalRoute.of(context)!.settings.name;
