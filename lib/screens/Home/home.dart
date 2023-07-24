@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import '../../config/size_config.dart';
 import '../../config/styles.dart';
 import '../shoes_details/shoes_details.dart';
+import 'navigation_darwer.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -27,12 +28,21 @@ class _HomeState extends State<Home> {
     SizeConfig.init(context);
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Styles.FrameColor,
           elevation: 0,
-          leading: IconButton(
-            icon: SvgPicture.asset('assets/icons/menu.svg'),
-            onPressed: () {},
-            color: Styles.TextColor,
+          leading: Builder(
+            builder: (context) {
+              return IconButton(
+                icon: SvgPicture.asset(
+                  'assets/icons/menu.svg',
+                ),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                color: Styles.TextColor,
+              );
+            },
           ),
           title: Column(
             children: [
@@ -63,6 +73,7 @@ class _HomeState extends State<Home> {
             )
           ],
         ),
+        drawer: NavigationDrawer(),
         body: Consumer<SessionProvider>(
           builder: (context, session, child) {
             return SingleChildScrollView(

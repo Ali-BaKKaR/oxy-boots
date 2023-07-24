@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:oxyboots/screens/favourites/favourites.dart';
+import 'package:oxyboots/screens/notifications/notifications_screen.dart';
 
 import '../config/styles.dart';
 import '../screens/Home/home.dart';
@@ -15,10 +16,16 @@ class OBBottomNavigationBar extends StatefulWidget {
 class OBBottomNavigationBarState extends State<OBBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
-    String? currentRouteName = ModalRoute.of(context)!.settings.name;
+    String currentRouteName;
+    if (ModalRoute.of(context)?.settings.name != '/') {
+      currentRouteName = ModalRoute.of(context)!.settings.name!;
+    } else {
+      currentRouteName = './home';
+    }
     return Container(
+        color: Styles.BGColor,
         padding: EdgeInsets.only(left: 30, right: 30),
-        height: 70,
+        height: 50,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -50,16 +57,19 @@ class OBBottomNavigationBarState extends State<OBBottomNavigationBar> {
                     : Styles.TextColor,
               ),
             ),
+            Container(
+              height: 0,
+            ),
             IconButton(
               onPressed: () => {
                 Navigator.of(context).pushNamed(
-                  Favourites.routeName,
+                  NotificationsScreen.routeName,
                 )
               },
               icon: Icon(
                 Icons.notifications_none,
                 size: 30,
-                color: currentRouteName == './notifications'
+                color: currentRouteName == './NotificationsScreen'
                     ? Styles.PrimaryColor
                     : Styles.TextColor,
               ),

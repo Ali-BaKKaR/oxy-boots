@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:oxyboots/component/ob_image_button.dart';
@@ -5,6 +7,7 @@ import 'package:oxyboots/component/ob_button.dart';
 import 'package:oxyboots/component/ob_flat_button.dart';
 import 'package:oxyboots/component/ob_input_text.dart';
 import 'package:oxyboots/config/styles.dart';
+import 'package:oxyboots/screens/Home/home.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../config/size_config.dart';
@@ -19,6 +22,17 @@ class LoginOptions extends StatefulWidget {
 }
 
 class _LoginOptionsState extends State<LoginOptions> {
+  void initState() {
+    Supabase.instance.client.auth.onAuthStateChange.listen((data) {
+      final AuthChangeEvent event = data.event;
+      final Session? session = data.session;
+      if (event == AuthChangeEvent.signedIn) {
+        Navigator.of(context).pushReplacementNamed(Home.routeName);
+      }
+    });
+    super.initState();
+  }
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -129,9 +143,8 @@ class _LoginOptionsState extends State<LoginOptions> {
         ));
   }
 
-  void _signinTapped() {
-    // NOTE we're simulating login here for now
-    Supabase.instance.client.auth.signInWithOAuth(Provider.github,
+  Future _signinTapped() async {
+    await Supabase.instance.client.auth.signInWithOAuth(Provider.github,
         redirectTo: dotenv.env['SUPABASE_AUTH_CALLBACK']);
   }
 }

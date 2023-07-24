@@ -32,32 +32,27 @@ class SessionProvider extends ChangeNotifier {
     } else {
       _cartShoesList[shoes] = 1;
     }
+    _subtotal = _subtotal + shoes.price;
     notifyListeners();
   }
 
   increament(Shoes shoes) {
     _cartShoesList[shoes] = _cartShoesList[shoes]! + 1;
-    refreshSuptotal();
+    _subtotal = double.parse((_subtotal + shoes.price).toStringAsFixed(2));
     notifyListeners();
   }
 
   reduction(Shoes shoes) {
     if (_cartShoesList[shoes]! > 1) {
       _cartShoesList[shoes] = _cartShoesList[shoes]! - 1;
-      refreshSuptotal();
+      _subtotal = _subtotal - shoes.price;
       notifyListeners();
     }
   }
 
   remove(Shoes shoes) {
     _cartShoesList.remove(shoes);
+    _subtotal = _subtotal - shoes.price;
     notifyListeners();
-  }
-
-  refreshSuptotal() {
-    for (var i = 0; i < _cartShoesList.values.length; i++) {
-      _subtotal = subtotal + _cartShoesList.keys.elementAt(i).price;
-      print(_subtotal);
-    }
   }
 }

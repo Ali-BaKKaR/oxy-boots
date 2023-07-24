@@ -8,6 +8,7 @@ import 'package:oxyboots/screens/cart/cart.dart';
 import 'package:oxyboots/screens/favourites/favourites.dart';
 import 'package:oxyboots/screens/login_options/signup.dart';
 import 'package:oxyboots/screens/login_options/login_options.dart';
+import 'package:oxyboots/screens/notifications/notifications_screen.dart';
 import 'package:oxyboots/screens/splash/splash.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -29,7 +30,8 @@ class App extends StatelessWidget {
         Signup.routeName: (context) => const Signup(),
         Favourites.routeName: (context) => const Favourites(),
         Cart.routeName: (context) => const Cart(),
-        Home.routeName: (context) => const Home()
+        Home.routeName: (context) => const Home(),
+        NotificationsScreen.routeName: (context) => const NotificationsScreen()
       },
     );
   }

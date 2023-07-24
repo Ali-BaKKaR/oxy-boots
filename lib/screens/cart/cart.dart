@@ -216,10 +216,20 @@ class _CartState extends State<Cart> {
                           ],
                         ),
                       ),
-                      OBButton(Text('Checkout'), true, onTap: () {}),
+                      OBButton(Text('Checkout'), true, onTap: () {
+                        final snackBar = SnackBar(
+                          content: const Text('Yay! A SnackBar!'),
+                          action: SnackBarAction(
+                            label: 'Undo',
+                            onPressed: () {
+                              // Some code to undo the change.
+                            },
+                          ),
+                        );
+                      }),
                     ],
                   ),
-                )
+                ),
               ],
             );
           },
