@@ -63,7 +63,7 @@ class _SplashState extends State<Splash> {
     if (session != null) {
       Navigator.of(context).pushReplacementNamed(Home.routeName);
     } else {
-      Navigator.of(context).pushReplacementNamed(LoginOptions.routeName);
+      Navigator.of(context).pushReplacementNamed(Intro.routeName);
     }
   }
 
